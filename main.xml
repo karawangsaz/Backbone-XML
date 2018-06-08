@@ -10,7 +10,7 @@
     - Valid OpenGraph
     - Valid Microformats
     - Valid Social Sharing Thumbnail and Description
-	- Valid Structured Data
+	  - Valid Structured Data
     - Valid Twitter Card
   </b:comment>
 
@@ -25,7 +25,7 @@
     # Localization
     # DNS Prefetches
     # Title Tag
-	# Social Meta Tags
+	  # Social Meta Tags
       @ Twitter Website Account
       @ Twitter Author Account
       @ Facebook App ID
