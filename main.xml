@@ -93,16 +93,16 @@
       <b:case expr:value='data:view.search AND data:view.search.query'/>
       <b:comment>Search Result</b:comment>
       	<title><data:blog.pageName/></title>
-      	<meta content='all' name='robots'/>
+      	<meta content='follow, noindex' name='robots'/>
         <meta content='website' property='og:type'/>
         <meta expr:content='data:blog.pageName' name='twitter:title' property='og:title'/>
 
       <b:case expr:value='data:view.search AND data:view.search.label'/>
       <b:comment>Label</b:comment>
       	<title><data:blog.title/> - <data:blog.pageName/></title>
+      	<meta content='all' name='robots'/>
         <meta content='website' property='og:type'/>
         <meta expr:content='data:blog.pageName + " - " + data:blog.title' name='twitter:title' property='og:title'/>
-      	<meta content='all' name='robots'/>
 
     </b:switch>
 
