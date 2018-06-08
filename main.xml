@@ -5,6 +5,7 @@
   <b:comment>
     Features:
     - Breadcrumb
+    - Optimized Google SERP
     - Valid Canonical (Fix duplicate on SERP)
     - Valid OpenGraph
     - Valid Microformats
@@ -15,7 +16,6 @@
 
   <b:comment>
     Coming Soon Features:
-    - custom error page. find: custom error page
   </b:comment>
 
   <b:comment>
@@ -31,7 +31,6 @@
       @ Facebook App ID
     # Social Sharing
     # Blog Thumbnail
-    # Custom Error Page
   </b:comment>
 
   <head>
@@ -70,9 +69,9 @@
       	<meta content='all' name='robots'/>
         <meta content='article' property='og:type'/>
         <meta expr:content='data:blog.title' name='author'/>
-        <meta expr:content='data:blog.pageName + &quot; - &quot; + data:blog.title' name='twitter:title' property='og:title'/>
+        <meta expr:content='data:blog.pageName + " - " + data:blog.title' name='twitter:title' property='og:title'/>
         <b:if cond='data:view.featuredImage.isResizable'>
-          <meta expr:content='resizeImage(data:view.featuredImage, 600, &quot;120:63&quot;)' name='twitter:image' property='og:image'/>
+          <meta expr:content='resizeImage(data:view.featuredImage, 600, "120:63")' name='twitter:image' property='og:image'/>
           <b:else/>
           <meta content='https://goo.gl/NYBaWX' name='twitter:image' property='og:image'/>
         </b:if>
@@ -89,7 +88,7 @@
       	<title><data:blog.title/> - <data:blog.pageName/></title>
       	<meta content='follow, noindex' name='robots'/>
       	<meta content='website' property='og:type'/>
-        <meta expr:content='data:blog.pageName + &quot; - &quot; + data:blog.title' name='twitter:title' property='og:title'/>
+        <meta expr:content='data:blog.pageName + " - " + data:blog.title' name='twitter:title' property='og:title'/>
 
       <b:case expr:value='data:view.search AND data:view.search.query'/>
       <b:comment>Search Result</b:comment>
@@ -102,7 +101,7 @@
       <b:comment>Label</b:comment>
       	<title><data:blog.title/> - <data:blog.pageName/></title>
         <meta content='website' property='og:type'/>
-        <meta expr:content='data:blog.pageName + &quot; - &quot; + data:blog.title' name='twitter:title' property='og:title'/>
+        <meta expr:content='data:blog.pageName + " - " + data:blog.title' name='twitter:title' property='og:title'/>
       	<meta content='all' name='robots'/>
 
     </b:switch>
@@ -284,10 +283,10 @@
             <b:widget-setting name='homeTitle'>Home</b:widget-setting>
           </b:widget-settings>
           <b:includable id='main'>
-            <b:if cond='data:title != &quot;&quot;'><h2><data:title/></h2></b:if>
+            <b:if cond='data:title != ""'><h2><data:title/></h2></b:if>
             <div class='widget-content' id='nav' itemscope='itemscope' itemtype='http://schema.org/SiteNavigationElement'>
               <b:if cond='data:mobile'>
-                <select expr:id='data:widget.instanceId + &quot;_select&quot;'>
+                <select expr:id='data:widget.instanceId + "_select"'>
                   <b:loop values='data:links' var='link'>
                     <option expr:value='data:link.href'>
                       <b:attr cond='data:link.isCurrentPage' name='selected' value='selected'/>
@@ -322,7 +321,7 @@
           </b:widget-settings>
           <b:includable id='main'>
             <b:if cond='data:useImage'>
-              <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
+              <b:if cond='data:imagePlacement == "BEHIND"'>
                 <b:if cond='data:mobile'>
                   <div id='header-inner'>
                     <div class='titlewrapper'>
@@ -335,7 +334,7 @@
 
                   <b:else/>
 
-                  <div expr:style='&quot;background-image: url(\&quot;&quot; + data:sourceUrl + &quot;\&quot;); &quot; + &quot;background-position: &quot; + data:backgroundPositionStyleStr + &quot;; &quot; + data:widthStyleStr + &quot;min-height: &quot; + data:height + &quot;_height: &quot; + data:height + &quot;background-repeat: no-repeat; &quot;' id='header-inner'>
+                  <div expr:style='"background-image: url(\"" + data:sourceUrl + "\"); " + "background-position: " + data:backgroundPositionStyleStr + "; " + data:widthStyleStr + "min-height: " + data:height + "_height: " + data:height + "background-repeat: no-repeat; "' id='header-inner'>
                     <div class='titlewrapper'>
                       <h1 class='title'>
                         <b:include name='title'/>
@@ -351,11 +350,11 @@
                 <!-- Show the image only -->
                 <div id='header-inner'>
                   <a expr:href='data:blog.homepageUrl' style='display: block'>
-                    <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_headerimg&quot;' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
+                    <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + "_headerimg"' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
                   </a>
 
                   <!--Show the description-->
-                  <b:if cond='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;'>
+                  <b:if cond='data:imagePlacement == "BEFORE_DESCRIPTION"'>
                     <b:include name='description'/>
                   </b:if>
                 </div>
@@ -471,7 +470,7 @@
             <b:include cond='data:top.showPlusOne' name='googlePlusBootstrap'/>
           </b:includable>
           <b:includable id='backlinkDeleteIcon' var='backlink'>
-            <span expr:class='&quot;item-control &quot; + data:backlink.adminClass'>
+            <span expr:class='"item-control " + data:backlink.adminClass'>
               <a expr:href='data:backlink.deleteUrl' expr:title='data:top.deleteBacklinkMsg'>
                 <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
               </a>
@@ -500,7 +499,7 @@
               </dl>
             </b:if>
             <p class='comment-footer'>
-              <a class='comment-link' expr:href='data:post.createLinkUrl' expr:id='data:widget.instanceId + &quot;_backlinks-create-link&quot;' target='_blank'><data:post.createLinkLabel/></a>
+              <a class='comment-link' expr:href='data:post.createLinkUrl' expr:id='data:widget.instanceId + "_backlinks-create-link"' target='_blank'><data:post.createLinkLabel/></a>
             </p>
           </b:includable>
           <b:includable id='breadcrumb'>
@@ -570,7 +569,7 @@
               <a name='comment-form'/>
               <b:if cond='data:mobile'>
                 <h4 id='comment-post-message'>
-                  <a expr:id='data:widget.instanceId + &quot;_comment-editor-toggle-link&quot;' href='javascript:void(0)'><data:postCommentMsg/></a></h4>
+                  <a expr:id='data:widget.instanceId + "_comment-editor-toggle-link"' href='javascript:void(0)'><data:postCommentMsg/></a></h4>
                 <p><data:blogCommentMessage/></p>
                 <data:blogTeamBlogMessage/>
                 <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
@@ -589,7 +588,7 @@
             </div>
           </b:includable>
           <b:includable id='commentDeleteIcon' var='comment'>
-            <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+            <span expr:class='"item-control " + data:comment.adminClass'>
               <b:if cond='data:showCmtPopup'>
                 <div class='goog-toggle-button'>
                   <div class='goog-inline-block comment-action-icon'/>
@@ -607,7 +606,7 @@
               </span>
               <b:else/>
               <a class='comment-link' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
-                <data:post.commentLabelFull/><b:eval expr='data:view.isSingleItem ? &quot;:&quot; : &quot;.&quot;'/>
+                <data:post.commentLabelFull/><b:eval expr='data:view.isSingleItem ? ":" : "."'/>
               </a>
             </b:if>
           </b:includable>
@@ -646,10 +645,10 @@
                   </span>
                 </b:if>
 
-                <div expr:id='data:widget.instanceId + &quot;_comments-block-wrapper&quot;'>
+                <div expr:id='data:widget.instanceId + "_comments-block-wrapper"'>
                   <dl expr:class='data:post.avatarIndentClass' id='comments-block'>
                     <b:loop values='data:post.comments' var='comment'>
-                      <dt expr:class='&quot;comment-author &quot; + data:comment.authorClass' expr:id='data:comment.anchorName'>
+                      <dt expr:class='"comment-author " + data:comment.authorClass' expr:id='data:comment.anchorName'>
                         <b:if cond='data:comment.favicon'>
                           <img expr:src='data:comment.favicon' height='16px' style='margin-bottom:-2px;' width='16px'/>
                         </b:if>
@@ -725,14 +724,14 @@
               </b:if>
 
               <div id='backlinks-container'>
-                <div expr:id='data:widget.instanceId + &quot;_backlinks-container&quot;'>
+                <div expr:id='data:widget.instanceId + "_backlinks-container"'>
                   <b:include cond='data:post.showBacklinks' data='post' name='backlinks'/>
                 </div>
               </div>
             </div>
           </b:includable>
           <b:includable id='feedLinks'>
-            <b:if cond='data:blog.pageType != &quot;item&quot;'> <!-- Blog feed links -->
+            <b:if cond='data:blog.pageType != "item"'> <!-- Blog feed links -->
               <b:if cond='data:feedLinks'>
                 <div class='blog-feeds'>
                   <b:include data='feedLinks' name='feedLinksBody'/>
@@ -761,7 +760,7 @@
               <script expr:src='data:post.iframeCommentSrc' type='text/javascript'/>
               <div class='cmt_iframe_holder' expr:data-href='data:post.url.canonical' expr:data-viewtype='data:post.viewType'/>
 
-              <b:if cond='data:post.embedCommentForm == &quot;false&quot;'>
+              <b:if cond='data:post.embedCommentForm == "false"'>
                 <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'><data:postCommentMsg/></a>
               </b:if>
             </b:if>
@@ -800,7 +799,7 @@
                 </a>
 
                 <div class='mobile-index-comment'>
-                  <b:include cond='data:blog.pageType != &quot;static_page&quot;                          and data:post.allowComments                          and data:post.numComments != 0' data='post' name='comment_count_picker'/>
+                  <b:include cond='data:blog.pageType != "static_page"                          and data:post.allowComments                          and data:post.numComments != 0' data='post' name='comment_count_picker'/>
                 </div>
               </div>
             </div>
@@ -811,7 +810,7 @@
 
               <b:include data='top' name='status-message'/>
 
-              <b:if cond='data:blog.pageType == &quot;index&quot;'>
+              <b:if cond='data:blog.pageType == "index"'>
                 <b:loop values='data:posts' var='post'>
                   <b:include data='post' name='mobile-index-post'/>
                 </b:loop>
@@ -828,13 +827,13 @@
             <div class='blog-pager' id='blog-pager'>
               <b:if cond='data:newerPageUrl'>
                 <div class='mobile-link-button' id='blog-pager-newer-link'>
-                  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'>&amp;lsaquo;</a>
+                  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + "_blog-pager-newer-link"' expr:title='data:newerPageTitle'>&amp;lsaquo;</a>
                 </div>
               </b:if>
 
               <b:if cond='data:olderPageUrl'>
                 <div class='mobile-link-button' id='blog-pager-older-link'>
-                  <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>&amp;rsaquo;</a>
+                  <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + "_blog-pager-older-link"' expr:title='data:olderPageTitle'>&amp;rsaquo;</a>
                 </div>
               </b:if>
 
@@ -881,7 +880,7 @@
                       <div class='post-header-line-1'/>
                     </div>
 
-                    <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' itemprop='articleBody'>
+                    <div class='post-body entry-content' expr:id='"post-body-" + data:post.id' itemprop='articleBody'>
                       <data:post.body/>
                       <div style='clear: both;'/> <!-- clear for photos floats -->
                     </div>
@@ -916,7 +915,7 @@
                         </span>
 
                         <span class='post-comment-link'>
-                          <b:include cond='data:blog.pageType not in {&quot;item&quot;,&quot;static_page&quot;}                                  and data:post.allowComments' data='post' name='comment_count_picker'/>
+                          <b:include cond='data:blog.pageType not in {"item","static_page"}                                  and data:post.allowComments' data='post' name='comment_count_picker'/>
                         </span>
                       </div>
 
@@ -934,7 +933,7 @@
                     </div>
                   </div>
 
-                  <b:include cond='data:blog.pageType in {&quot;static_page&quot;,&quot;item&quot;}' data='post' name='comment_picker'/>
+                  <b:include cond='data:blog.pageType in {"static_page","item"}' data='post' name='comment_picker'/>
                 </div>
               </div>
             </div>
@@ -943,13 +942,13 @@
             <div class='blog-pager' id='blog-pager'>
               <b:if cond='data:newerPageUrl'>
                 <span id='blog-pager-newer-link'>
-                  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
+                  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + "_blog-pager-newer-link"' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
                 </span>
               </b:if>
 
               <b:if cond='data:olderPageUrl'>
                 <span id='blog-pager-older-link'>
-                  <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'><data:olderPageTitle/></a>
+                  <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + "_blog-pager-older-link"' expr:title='data:olderPageTitle'><data:olderPageTitle/></a>
                 </span>
               </b:if>
 
@@ -981,7 +980,7 @@
               </div>
 
               <!-- Then use the post body as the schema.org description, for good G+/FB snippeting. -->
-              <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' expr:itemprop='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;'>
+              <div class='post-body entry-content' expr:id='"post-body-" + data:post.id' expr:itemprop='(data:blog.metaDescription ? "" : "description ") + "articleBody"'>
                 <data:post.body/>
                 <div style='clear: both;'/> <!-- clear for photos floats -->
               </div>
@@ -1044,7 +1043,7 @@
                   <b:comment>backlinks</b:comment>
                   <span class='post-backlinks post-comment-link'>
                     <b:if cond='data:view.isMultipleItems and data:post.showBacklinks'>
-                      <a class='comment-link' expr:href='data:post.url + &quot;#links&quot;'><data:top.backlinkLabel/></a>
+                      <a class='comment-link' expr:href='data:post.url + "#links"'><data:top.backlinkLabel/></a>
                     </b:if>
                   </span>
 
@@ -1120,7 +1119,7 @@
           </b:includable>
           <b:includable id='postQuickEdit' var='post'>
             <b:if cond='data:post.editUrl'>
-              <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
+              <span expr:class='"item-control " + data:post.adminClass'>
                 <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg'>
                   <img alt='Post Quick Edit Icon' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
                 </a>
@@ -1128,7 +1127,7 @@
             </b:if>
           </b:includable>
           <b:includable id='shareButtons' var='post'>
-            <b:if cond='data:top.showEmailButton'><a class='goog-inline-block share-button sb-email' expr:href='data:post.sharePostUrl + &quot;&amp;target=email&quot;' expr:title='data:top.emailThisMsg' target='_blank'><span class='share-button-link-text'><data:top.emailThisMsg/></span></a></b:if><b:if cond='data:top.showBlogThisButton'><a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + &quot;&amp;target=blog&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=270,width=475\&quot;); return false;&quot;' expr:title='data:top.blogThisMsg' target='_blank'><span class='share-button-link-text'><data:top.blogThisMsg/></span></a></b:if><b:if cond='data:top.showTwitterButton'><a class='goog-inline-block share-button sb-twitter' expr:href='data:post.sharePostUrl + &quot;&amp;target=twitter&quot;' expr:title='data:top.shareToTwitterMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToTwitterMsg/></span></a></b:if><b:if cond='data:top.showFacebookButton'><a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;' expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' expr:title='data:top.shareToFacebookMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToFacebookMsg/></span></a></b:if><b:if cond='data:top.showPinterestButton'><a class='goog-inline-block share-button sb-pinterest' expr:href='data:post.sharePostUrl + &quot;&amp;target=pinterest&quot;' expr:title='data:top.shareToPinterestMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToPinterestMsg/></span></a></b:if><b:if cond='data:top.showPlusOne'><div class='goog-inline-block google-plus-share-container'><data:post.googlePlusShareTag/></div></b:if>
+            <b:if cond='data:top.showEmailButton'><a class='goog-inline-block share-button sb-email' expr:href='data:post.sharePostUrl + "&amp;target=email"' expr:title='data:top.emailThisMsg' target='_blank'><span class='share-button-link-text'><data:top.emailThisMsg/></span></a></b:if><b:if cond='data:top.showBlogThisButton'><a class='goog-inline-block share-button sb-blog' expr:href='data:post.sharePostUrl + "&amp;target=blog"' expr:onclick='"window.open(this.href, \"_blank\", \"height=270,width=475\"); return false;"' expr:title='data:top.blogThisMsg' target='_blank'><span class='share-button-link-text'><data:top.blogThisMsg/></span></a></b:if><b:if cond='data:top.showTwitterButton'><a class='goog-inline-block share-button sb-twitter' expr:href='data:post.sharePostUrl + "&amp;target=twitter"' expr:title='data:top.shareToTwitterMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToTwitterMsg/></span></a></b:if><b:if cond='data:top.showFacebookButton'><a class='goog-inline-block share-button sb-facebook' expr:href='data:post.sharePostUrl + "&amp;target=facebook"' expr:onclick='"window.open(this.href, \"_blank\", \"height=430,width=640\"); return false;"' expr:title='data:top.shareToFacebookMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToFacebookMsg/></span></a></b:if><b:if cond='data:top.showPinterestButton'><a class='goog-inline-block share-button sb-pinterest' expr:href='data:post.sharePostUrl + "&amp;target=pinterest"' expr:title='data:top.shareToPinterestMsg' target='_blank'><span class='share-button-link-text'><data:top.shareToPinterestMsg/></span></a></b:if><b:if cond='data:top.showPlusOne'><div class='goog-inline-block google-plus-share-container'><data:post.googlePlusShareTag/></div></b:if>
           </b:includable>
           <b:includable id='status-message'>
             <b:if cond='data:navMessage'>
@@ -1371,7 +1370,7 @@
               </b:if>
 
               <div id='backlinks-container'>
-                <div expr:id='data:widget.instanceId + &quot;_backlinks-container&quot;'>
+                <div expr:id='data:widget.instanceId + "_backlinks-container"'>
                   <b:include cond='data:post.showBacklinks' data='post' name='backlinks'/>
                 </div>
               </div>
@@ -1391,7 +1390,7 @@
             <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
           </b:widget-settings>
           <b:includable id='main'>
-            <b:if cond='data:title != &quot;&quot;'><h2><data:title/></h2></b:if>
+            <b:if cond='data:title != ""'><h2><data:title/></h2></b:if>
             <div class='widget-content popular-posts'>
               <ul>
                 <b:loop values='data:posts' var='post'>
@@ -1406,12 +1405,12 @@
                       </b:if>
                       <b:else/>
                       <!-- (3) Show only thumbnails or (4) Snippets and thumbnails. -->
-                      <div expr:class='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;'>
+                      <div expr:class='data:showSnippets ? "item-content" : "item-thumbnail-only"'>
                         <b:if cond='data:post.featuredImage.isResizable or data:post.thumbnail'>
                           <div class='item-thumbnail'>
                             <a expr:href='data:post.href' expr:title='data:post.title' target='_blank'>
-                              <b:with value='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;) : data:post.thumbnail' var='image'>
-                                <img class='u-photo' expr:alt='&quot;Thumbnail of &quot; + data.post.title' expr:src='data:image'/>
+                              <b:with value='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, "1:1") : data:post.thumbnail' var='image'>
+                                <img class='u-photo' expr:alt='"Thumbnail of " + data.post.title' expr:src='data:image'/>
                               </b:with>
                             </a>
                           </div>
@@ -1438,11 +1437,11 @@
             <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
           </b:widget-settings>
           <b:includable id='main'>
-            <b:if cond='data:title != &quot;&quot;'>
+            <b:if cond='data:title != ""'>
               <h2><data:title/></h2>
             </b:if>
-            <div expr:class='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;'>
-              <b:if cond='data:display == &quot;list&quot;'>
+            <div expr:class='"widget-content " + data:display + "-label-widget-content"'>
+              <b:if cond='data:display == "list"'>
                 <ul>
                   <b:loop values='data:labels' var='label'>
                     <li class='h-item'>
@@ -1459,7 +1458,7 @@
                 </ul>
                 <b:else/>
                 <b:loop values='data:labels' var='label'>
-                  <span expr:class='&quot;label-size label-size-&quot; + data:label.cssSize'>
+                  <span expr:class='"label-size label-size-" + data:label.cssSize'>
                     <b:if cond='data:blog.url == data:label.url'>
                       <span class='p-name' expr:dir='data:blog.languageDirection'><data:label.name/></span>
                       <b:else/>
@@ -1485,14 +1484,14 @@
     <b:comment> $GDPR Cookie Consent Script </b:comment>
     <script src='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js'/>
     <script>
-      window.addEventListener(&quot;load&quot;, function(){
+      window.addEventListener("load", function(){
         window.cookieconsent.initialise({
-          &quot;palette&quot;: {
-            &quot;popup&quot;: {
-              &quot;background&quot;: &quot;#000&quot;
+          "palette": {
+            "popup": {
+              "background": "#000"
             },
-            &quot;button&quot;: {
-              &quot;background&quot;: &quot;#f1d600&quot;
+            "button": {
+              "background": "#f1d600"
             }
           }
         })});
