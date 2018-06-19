@@ -227,7 +227,7 @@
             </b:if>
             <data:post.cmtfpIframe/>
             <script type='text/javascript'>
-                BLOG_CMT_createIframe( & #39;<data:post.appRpcRelayPath/>&# 39;);
+                BLOG_CMT_createIframe('<data:post.appRpcRelayPath/>');
             </script>
         </div>
     </b:includable>
@@ -923,7 +923,7 @@
             </b:if>
             <data:post.cmtfpIframe/>
             <script type='text/javascript'>
-                BLOG_CMT_createIframe( & #39;<data:post.appRpcRelayPath/>&# 39;);
+                BLOG_CMT_createIframe('<data:post.appRpcRelayPath/>');
             </script>
         </div>
     </b:includable>
@@ -932,9 +932,9 @@
 
         <script type='text/javascript'>
             (function () {
-                var items = < data: post.commentJso / > ;
-                var msgs = < data: post.commentMsgs / > ;
-                var config = < data: post.commentConfig / > ;
+                var items = <data:post.commentJso/> ;
+                var msgs = <data:post.commentMsgs/> ;
+                var config = <data:post.commentConfig/> ;
 
                 // <![CDATA[
                 var cursor = null;
