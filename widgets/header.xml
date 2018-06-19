@@ -1,0 +1,84 @@
+<b:widget id='Header1' locked='false' title='Backbone XML (Header)' type='Header' version='1'>
+
+    <b:widget-settings>
+        <b:widget-setting name='displayUrl' />
+        <b:widget-setting name='displayHeight'>0</b:widget-setting>
+        <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
+        <b:widget-setting name='useImage'>false</b:widget-setting>
+        <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+        <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+        <b:widget-setting name='displayWidth'>0</b:widget-setting>
+    </b:widget-settings>
+
+    <b:includable id='main'>
+        <b:if cond='data:useImage'>
+            <b:if cond='data:imagePlacement == "BEHIND"'>
+                <b:if cond='data:mobile'>
+                    <div id='header-inner'>
+                        <div class='titlewrapper'>
+                            <h1 class='title'>
+                                <b:include name='title' />
+                            </h1>
+                        </div>
+                        <b:include name='description' />
+                    </div>
+
+                    <b:else/>
+
+                    <div expr:style='"background-image: url(\"" + data:sourceUrl + "\"); " + "background-position: " + data:backgroundPositionStyleStr + "; " + data:widthStyleStr + "min-height: " + data:height + "_height: " + data:height + "background-repeat: no-repeat; "'
+                        id='header-inner'>
+                        <div class='titlewrapper'>
+                            <h1 class='title'>
+                                <b:include name='title' />
+                            </h1>
+                        </div>
+                        <b:include name='description' />
+                    </div>
+
+                </b:if>
+
+                <b:else/>
+
+                <!-- Show the image only -->
+                <div id='header-inner'>
+                    <a expr:href='data:blog.homepageUrl' style='display: block'>
+                        <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + "_headerimg"' expr:src='data:sourceUrl'
+                            expr:width='data:width' style='display: block' />
+                    </a>
+
+                    <!--Show the description-->
+                    <b:if cond='data:imagePlacement == "BEFORE_DESCRIPTION"'>
+                        <b:include name='description' />
+                    </b:if>
+                </div>
+            </b:if>
+
+            <b:else/>
+
+            <!--No header image -->
+            <div id='header-inner'>
+                <div class='titlewrapper'>
+                    <h1 class='title'>
+                        <b:include name='title' />
+                    </h1>
+                </div>
+                <b:include name='description' />
+            </div>
+            
+        </b:if>
+    </b:includable>
+    <b:includable id='description'>
+        <div class='descriptionwrapper'>
+            <p class='description'>
+                <span>
+                    <data:description/>
+                </span>
+            </p>
+        </div>
+    </b:includable>
+    <b:includable id='title'>
+        <b:tag cond='data:blog.url != data:blog.homepageUrl' expr:href='data:blog.homepageUrl' name='a'>
+            <data:title/>
+        </b:tag>
+    </b:includable>
+</b:widget>

@@ -1,0 +1,49 @@
+<b:widget id='PageList1' locked='false' title='Pages' type='PageList' version='1'>
+
+    <b:widget-settings>
+        <b:widget-setting name='pageListJson'>
+            <![CDATA[{'home': {'href': 'https://skeletone-demo.blogspot.com/', 'title': 'Home', 'position': 0}}]]>
+        </b:widget-setting>
+        <b:widget-setting name='homeTitle'>Home</b:widget-setting>
+    </b:widget-settings>
+
+    <b:includable id='main'>
+        <b:if cond='data:title'>
+            <h2><data:title/></h2>
+        </b:if>
+
+        <div class='widget-content' id='nav' itemscope='itemscope' itemtype='http://schema.org/SiteNavigationElement'>
+
+            <b:if cond='data:mobile'>
+
+                <!-- Show select option -->
+                <select expr:id='data:widget.instanceId + "_select"'>
+                    <b:loop values='data:links' var='link'>
+                        <option expr:value='data:link.href'>
+                            <b:attr cond='data:link.isCurrentPage' name='selected' value='selected' />
+                            <data:link.title/>
+                        </option>
+                    </b:loop>
+                </select>
+ 
+                <span class='pagelist-arrow'>&amp;#9660;</span>
+ 
+                <b:else/>
+ 
+                <!-- Show url list -->
+                <ul class='page-list nav'>
+                    <b:loop values='data:links' var='link'>
+                        <li>
+                            <b:class cond='data:link.isCurrentPage' name='active' />
+                            <a expr:href='data:link.href'>
+                                <data:link.title/>
+                            </a>
+                        </li>
+                    </b:loop>
+                </ul>
+            </b:if>
+
+            <b:include name='quickedit' />
+        </div>
+    </b:includable>
+</b:widget>

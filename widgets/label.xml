@@ -1,0 +1,83 @@
+<b:widget id='Label1' locked='false' title='Labels' type='Label' version='1'>
+
+    <b:widget-settings>
+        <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+        <b:widget-setting name='display'>LIST</b:widget-setting>
+        <b:widget-setting name='selectedLabelsList' />
+        <b:widget-setting name='showType'>ALL</b:widget-setting>
+        <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
+    </b:widget-settings>
+
+    <b:includable id='main'>
+
+        <!-- Widget title -->
+        <b:if cond='data:title'>
+            <h2><data:title/></h2>
+        </b:if>
+
+        <div expr:class='"widget-content " + data:display + "-label-widget-content"'>
+
+            <b:if cond='data:display == "list"'>
+
+                <!-- Display mode = list -->
+                <ul expr:class="data:display">
+                    <b:loop values='data:labels' var='label'>
+                        <li class='h-item'>
+                            <b:if cond='data:blog.url == data:label.url'>
+
+                                <!-- In the current label url -->
+                                <span expr:dir='data:blog.languageDirection' class='label-active'>
+                                    <data:label.name/>
+                                </span>
+                            
+                                <b:else/>
+                            
+                                <!-- Except in the current label url -->
+                                <a class='p-name' expr:dir='data:blog.languageDirection' expr:href='data:label.url'>
+                                    <data:label.name/>
+                                </a>
+                            
+                            </b:if>
+
+                            <b:if cond='data:showFreqNumbers'>
+
+                                <!-- Show posts count -->
+                                <span dir='ltr'>(<data:label.count/>)</span>
+
+                            </b:if>
+
+                        </li>
+                    </b:loop>
+                </ul>
+
+                <b:else/>
+
+                <b:loop values='data:labels' var='label'>
+                    <span expr:class='"label-size label-size-" + data:label.cssSize'>
+                        <b:if cond='data:blog.url == data:label.url'>
+
+                            <!-- In the current label url -->
+                            <span class='p-name' expr:dir='data:blog.languageDirection' class='label-active'>
+                                <data:label.name/>
+                            </span>
+
+                            <b:else/>
+
+                            <!-- Except in the current label url -->
+                            <a class='p-name' expr:dir='data:blog.languageDirection' expr:href='data:label.url'>
+                                <data:label.name/>
+                            </a>
+
+                        </b:if>
+
+                        <b:if cond='data:showFreqNumbers'>
+                            <!-- Show posts count -->
+                            <span class='label-count' dir='ltr'>(<data:label.count/>)</span>
+                        </b:if>
+                    </span>
+                </b:loop>
+            </b:if>
+            <b:include name='quickedit' />
+        </div>
+    </b:includable>
+</b:widget>

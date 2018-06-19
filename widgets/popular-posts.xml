@@ -1,0 +1,77 @@
+<b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' version='1'>
+    <b:widget-settings>
+        <b:widget-setting name='numItemsToShow'>10</b:widget-setting>
+        <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+        <b:widget-setting name='showSnippets'>true</b:widget-setting>
+        <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+
+        <!-- Widget title -->
+        <b:if cond='data:title'>
+            <h2><data:title/></h2>
+        </b:if>
+
+        <div class='widget-content popular-posts'>
+            <ul>
+                <b:loop values='data:posts' var='post'>
+                    <li class='h-item'>
+
+                        <!-- No Thumbnail -->
+                        <b:if cond='!data:showThumbnails'>
+
+                            <!-- Post title -->
+                            <h3 class='item-title'>
+                                <a class='p-name' expr:href='data:post.href'>
+                                    <data:post.title/>
+                                </a>
+                            </h3>
+
+                            <b:if cond='data:showSnippets'>
+
+                                <!-- Post snippet -->
+                                <p class='item-snippet'>
+                                    <data:post.snippet/>
+                                </p>
+
+                            </b:if>
+
+                            <b:else/>
+
+                            <!-- Show thumbnail -->
+                            <div expr:class='data:showSnippets ? "item-content" : "item-thumbnail-only"'>
+                                <b:if cond='data:post.featuredImage.isResizable or data:post.thumbnail'>
+
+                                    <!-- Post thumbnail -->
+                                    <div class='item-thumbnail'>
+                                        <a expr:href='data:post.href' expr:title='data:post.title' target='_blank'>
+                                            <img class='u-photo' expr:alt='"Thumbnail of " + data.post.title' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, "1:1") : data:post.thumbnail' />
+                                        </a>
+                                    </div>
+
+                                </b:if>
+
+                                <!-- Post title -->
+                                <h3 class='item-title'>
+                                    <a class='p-name' expr:href='data:post.href'>
+                                        <data:post.title/>
+                                    </a>
+                                </h3>
+
+                                <b:if cond='data:showSnippets'>
+
+                                    <!-- Post snippet -->
+                                    <p class='item-snippet'>
+                                        <data:post.snippet/>
+                                    </p>
+
+                                </b:if>
+                            </div>
+                        </b:if>
+                    </li>
+                </b:loop>
+            </ul>
+            <b:include name='quickedit' />
+        </div>
+    </b:includable>
+</b:widget>
